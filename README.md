@@ -1,2 +1,13 @@
 # Bank-Management-System
-Bank Management software for monitoring and controlling the transactions of banking system . The project “Banking Management System” is developed in C, which mainly focuses on basic operations in a bank like creating new A/c, and updating new information of A/c, searching A/c, deposit amount and withdrawal amount etc.
+LOGIN DETAILS FOR THE BANKER :-
+
+User Name: Samir Password : samir1
+
+NOTE: THE DATE SHOULD BE PROVIDED IN THE FORMAT OF (DAY MONTH YEAR) WITH NO SPECIAL CHARACTERS, IT SHOULD BE SEPARATED BY /or -
+
+***** IF YOU FIND ANY ERRORS OR ANY PROBLEMS RELATED THIS PROGRAM, FEEL FREE TO CONTACT US *****
+Contact: samir020@rediffmail.com
+
+***** LEAVE A COMMENT IF YOU LOVED OUR WORK *****
+
+THANK YOU FOR USING :)
