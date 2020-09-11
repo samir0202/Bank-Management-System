@@ -36,39 +36,61 @@ public:
 
 void account::createAc()
 {
-	cout<<"\n\n\n\t\t\tEnter the Account No. : ";
+	gotoxy(32,7);
+	cout<<"NEW ACCOUNT";
+	gotoxy(32,8);
+	cout<<"------------";
+	gotoxy(15,10);
+	cout<<"Account No. : ";
+	gotoxy(46,10);
+	cout<<"A/C Holder Name: ";
+	gotoxy(15,12);
+	cout<<"Type of the Account (C/S) : ";
+	gotoxy(46,12);
+	cout<<"Initial amount : ";
+	gotoxy(28,10);
 	cin>>acno;
-	cout<<"\n\t\t\tEnter the Name of the Account holder : ";
+	gotoxy(62,10);
 	cin.ignore();
 	cin.getline(name,50);
-	cout<<"\n\t\t\tEnter Type of the Account (C/S) : ";
+	gotoxy(42,12);
 	cin>>type;
 	type=toupper(type);
-	cout<<"\n\t\t\tEnter The Initial amount : ";
+	gotoxy(62,12);
 	cin>>deposit;
-	cout<<"\n\n\t\t\tAccount Created..";
+	gotoxy(15,14);
+	cout<<"Account Created..";
 }
 
 void account::showAc() const
-{
-	cout<<"\n\n\t\t\tAccount No. : "<<acno;
-	cout<<"\n\t\t\tAccount Holder Name : ";
-	cout<<name;
-	cout<<"\n\t\t\tType of Account : "<<type;
-	cout<<"\n\t\t\tBalance amount : "<<deposit;
+{	gotoxy(15,10);
+	cout<<"Account No. : "<<acno;
+	gotoxy(15,12);
+	cout<<"Account Holder Name : "<<name;
+	gotoxy(15,14);
+	cout<<"Type of Account : "<<type;
+	gotoxy(15,16);
+	cout<<"Balance amount : "<<deposit;
 }
 
 
 void account::modify()
 {
-	cout<<"\n\n\t\t\tAccount No. : "<<acno;
-	cout<<"\n\t\t\tModify Account Holder Name : ";
+	gotoxy(15,20);
+	cout<<"Account No. : "<<acno;
+	gotoxy(45,20);
+	cout<<"A/C Holder Name : ";
+	gotoxy(15,22);
+	cout<<"Type of A/C : ";
+	gotoxy(45,22);
+	cout<<"Balance amount : ";
+	gotoxy(63,20);
 	cin.ignore();
 	cin.getline(name,50);
-	cout<<"\n\t\t\tModify Type of Account : ";
+	gotoxy(29,22);
 	cin>>type;
 	type=toupper(type);
-	cout<<"\n\t\t\tModify Balance amount : ";
+	gotoxy(62,22);
 	cin>>deposit;
 }
 
@@ -85,8 +107,8 @@ void account::widr(int x)
 
 void account::report() const
 {
-	//gotoxy(23,13);
-	cout<<"\t\t"<<acno<<setw(10)<<" "<<name<<setw(10)<<" "<<type<<setw(6)<<deposit<<endl;
+	gotoxy(15,13);
+	cout<<""<<acno<<setw(10)<<" "<<name<<setw(13)<<" "<<type<<setw(16)<<deposit<<endl;
 }
 
 int account::retAc() const
@@ -114,6 +136,8 @@ void Main_Menu()
 		screen();
 		gotoxy(31,7);
 		cout<<"|| MAIN MENU ||";
+		gotoxy(31,8);
+		cout<<"---------------";
 		gotoxy(20,9);
 		cout<<"1. NEW ACCOUNT";
 		gotoxy(20,10);
@@ -144,19 +168,22 @@ void Main_Menu()
 		case '2':
 			system("CLS");
 			screen();
-			cout<<"\n\n\n\t\t\tEnter The account No. : "; cin>>num;
+			gotoxy(15,8);
+			cout<<"Enter The account No. : "; cin>>num;
 			withdraw(num, 1);
 			break;
 		case '3':
 			system("CLS");
 			screen();
-			cout<<"\n\n\n\t\t\tEnter The account No. : "; cin>>num;
+			gotoxy(15,8);
+			cout<<"Enter The account No. : "; cin>>num;
 			withdraw(num, 2);
 			break;
 		case '4':
 			system("CLS");
 			screen();
-			cout<<"\n\n\n\t\t\tEnter The account No. : "; cin>>num;
+			gotoxy(15,8);
+			cout<<"Enter The account No. : "; cin>>num;
 			dispAc(num);
 			break;
 		case '5':
@@ -166,13 +193,15 @@ void Main_Menu()
 		case '6':
 			system("CLS");
 			screen();
-			cout<<"\n\n\n\t\t\tEnter The account No. : "; cin>>num;
+			gotoxy(15,8);
+			cout<<"Enter The account No. : "; cin>>num;
 			deleteAc(num);
 			break;
 		 case '7':
 		 	system("CLS");
 		 	screen();
-			cout<<"\n\n\n\t\t\tEnter The account No. : "; cin>>num;
+		 	gotoxy(15,8);
+			cout<<"Enter The account No. : "; cin>>num;
 			modifyAc(num);
 			break;
 		 case '8':
@@ -208,10 +237,14 @@ void dispAc(int n)
 	inFile.open("account.dat",ios::binary);
 	if(!inFile)
 	{
+		gotoxy(15,8);
 		cout<<"File could not be open !! Press any Key...";
 		return;
 	}
-	cout<<"\n\t\t\tBALANCE DETAILS\n";
+	system("CLS");
+	screen();
+	gotoxy(25,8);
+	cout<<"BALANCE DETAILS";
     	while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account)))
 	{
 		if(ac.retAc()==n)
@@ -221,8 +254,9 @@ void dispAc(int n)
 		}
 	}
     inFile.close();
+    gotoxy(15,10);
 	if(flag==false)
-		cout<<"\n\n\t\t\tAccount number does not exist";
+		cout<<"Account number does not exist";
 }
 
 
@@ -235,6 +269,7 @@ void modifyAc(int n)
     File.open("account.dat",ios::binary|ios::in|ios::out);
 	if(!File)
 	{
+		gotoxy(15,8);
 		cout<<"File could not be open !! Press any Key...";
 		return;
 	}
@@ -244,18 +279,23 @@ void modifyAc(int n)
 		if(ac.retAc()==n)
 		{
 			ac.showAc();
-			cout<<"\n\n\t\t\tEnter The New Details of account"<<endl;
+			gotoxy(22,18);
+			cout<<"Enter The New Details of account"<<endl;
+			gotoxy(22,19);
+			cout<<"--------------------------------";
 			ac.modify();
 			int pos=(-1)*static_cast<int>(sizeof(account));
 			File.seekp(pos,ios::cur); //fncallat1353
 		    File.write(reinterpret_cast<char *> (&ac), sizeof(account));
-		    cout<<"\n\n\t\t\tRecord Updated";
+		    gotoxy(15,24);
+		    cout<<"Record Updated";
 		    found=true;
 		  }
 	}
 	File.close();
+	gotoxy(15,10);
 	if(found==false)
-		cout<<"\n\n\t\t\tRecord Not Found ";
+	cout<<"Record Not Found ";
 }
 
 
@@ -268,6 +308,7 @@ void deleteAc(int n)
 	inFile.open("account.dat",ios::binary);
 	if(!inFile)
 	{
+		gotoxy(15,8);
 		cout<<"File could not be open !! Press any Key...";
 		return;
 	}
@@ -284,7 +325,8 @@ void deleteAc(int n)
 	outFile.close();
 	remove("account.dat");
 	rename("Temp.dat","account.dat");
-	cout<<"\n\n\t\t\tRecord Deleted ..";
+	gotoxy(15,10);
+	cout<<"Record Deleted ..";
 }
 
 
@@ -293,21 +335,31 @@ void dispall()
 	system("CLS");
 	screen();
 	account ac;
+	int i=13;
 	ifstream inFile;
 	inFile.open("account.dat",ios::binary);
 	if(!inFile)
 	{
+		gotoxy(15,8);
 		cout<<"File could not be open !! Press any Key...";
 		return;
 	}
-	gotoxy(23,7);
-	cout<<"\tACCOUNT HOLDER LIST\n\n";
-	cout<<"\t\t====================================================\n";
-	cout<<"\t\tA/c no.      NAME           Type  Balance\n";
-	cout<<"\t\t====================================================\n";
+	gotoxy(30,7);
+	cout<<"ACCOUNT HOLDER LIST";
+	gotoxy(30,8);
+	cout<<"====================";
+	gotoxy(15,10);
+	cout<<"===================================================";
+	gotoxy(15,11);
+	cout<<"A/c no.      NAME           Type  	Balance\n";
+	gotoxy(15,12);
+	cout<<"===================================================\n";
+	
 	while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account)))
 	{
+		gotoxy(15,i);
 		ac.report();
+		i++;
 	}
 	inFile.close();
 }
@@ -322,6 +374,7 @@ void withdraw(int n, int option)
     File.open("account.dat", ios::binary|ios::in|ios::out);
 	if(!File)
 	{
+		gotoxy(15,8);
 		cout<<"File could not be open !! Press any Key...";
 		return;
 	}
@@ -333,15 +386,23 @@ void withdraw(int n, int option)
 			ac.showAc();
 			if(option==1)
 			{
-				cout<<"\n\n\t\t\tTO DEPOSITSS AMOUNT";
-				cout<<"\n\n\t\t\tEnter The amount to be deposited: ";
+				gotoxy(25,18);
+				cout<<"DEPOSITSS AMOUNT";
+				gotoxy(25,19);
+				cout<<"----------------";
+				gotoxy(15,20);
+				cout<<"Enter The amount to be deposited: ";
 				cin>>amt;
 				ac.dep(amt);
 			}
 		    if(option==2)
 			{
-				cout<<"\n\n\t\t\tTO WITHDRAW AMOUNT";
-				cout<<"\n\n\t\t\tEnter The amount to be withdraw: ";
+				gotoxy(25,18);
+				cout<<"WITHDRAW AMOUNT";
+				gotoxy(25,19);
+				cout<<"----------------";
+				gotoxy(15,20);
+				cout<<"Enter The amount to be withdraw: ";
 				cin>>amt;
 				int bal=ac.retdeposit()-amt;
 				if(bal<0)
@@ -352,13 +413,15 @@ void withdraw(int n, int option)
 			int pos=(-1)*static_cast<int>(sizeof(ac));
 			File.seekp(pos,ios::cur);//fn1353
 			File.write(reinterpret_cast<char *> (&ac), sizeof(account));
-			cout<<"\n\n\t\t\tRecord Updated";
+			gotoxy(15,22);
+			cout<<"Record Updated";
 			found=true;
 	       }
          }
     File.close();
+    gotoxy(15,10);
 	if(found==false)
-		cout<<"\n\n\t\t\tRecord Not Found ";
+		cout<<"Record Not Found ";
 }
 void gotoxy(short x, short y)
 {
